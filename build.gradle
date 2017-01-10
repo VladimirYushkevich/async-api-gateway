@@ -1,0 +1,39 @@
+buildscript {
+    ext {
+        springBootVersion = '1.4.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'async-api-gateway'
+    version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+
+    compile('javax.inject:javax.inject:1')
+    compile('org.projectlombok:lombok:1.16.12')
+    compile('com.mashape.unirest:unirest-java:1.4.9')
+    compile('com.netflix.hystrix:hystrix-core:1.5.9')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('com.jayway.restassured:rest-assured:2.9.0')
+}
