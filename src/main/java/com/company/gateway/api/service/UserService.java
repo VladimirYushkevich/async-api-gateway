@@ -31,8 +31,8 @@ public class UserService {
 
     public Observable<UserResponse> getUserWithPosts(Long userId) {
         try {
-            return new UserCommand(userGroupKey, userTimeOut, typicodeClient, "getUser", 1L).observe()
-                    .zipWith(new UserPostCommand(userGroupKey, userTimeOut, typicodeClient, "getUserPosts", 1L).observe(),
+            return new UserCommand(userGroupKey, userTimeOut, typicodeClient, "getUser", userId).observe()
+                    .zipWith(new UserPostCommand(userGroupKey, userTimeOut, typicodeClient, "getUserPosts", userId).observe(),
                             (UserDTO u, List<UserPostDTO> p) -> UserResponse.builder()
                                     .user(u)
                                     .posts(p)
