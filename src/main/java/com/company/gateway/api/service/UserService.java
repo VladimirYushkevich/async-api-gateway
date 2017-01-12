@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import rx.Observable;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -25,16 +26,18 @@ public class UserService {
     private int userTimeOut;
     @Value("${hystrix.command.UserPostCommand.timeoutInMilliseconds:1000}")
     private int postTimeOut;
+    @Value("${hystrix.command.user.groupKey}")
+    private String userGroupKey;
 
-    public UserResponse getUserWithPosts(Long userId) {
+    public Observable<UserResponse> getUserWithPosts(Long userId) {
         try {
-            return new UserCommand("UserGroup", userTimeOut, typicodeClient, "getUser", 1L).observe()
-                    .zipWith(new UserPostCommand("Tests", 1000, typicodeClient, "getUserPosts", 1L).observe(),
+            return new UserCommand(userGroupKey, userTimeOut, typicodeClient, "getUser", 1L).observe()
+                    .zipWith(new UserPostCommand(userGroupKey, userTimeOut, typicodeClient, "getUserPosts", 1L).observe(),
                             (UserDTO u, List<UserPostDTO> p) -> UserResponse.builder()
                                     .user(u)
                                     .posts(p)
-                                    .build())
-                    .toBlocking().toFuture().get();
+                                    .build());
+//                    .toBlocking().toFuture().get();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(String.format("Failed to get user with id=%s", userId));

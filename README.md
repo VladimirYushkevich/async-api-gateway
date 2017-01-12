@@ -8,7 +8,7 @@ http://jsonplaceholder.typicode.com/posts?userId=1 to obtain all comments writte
 
 ### Run service:
 ```
-gradle clean build -i && java -jar build/libs/async-api-gateway-0.0.1-SNAPSHOT.jar
+./gradlew clean build -i && java -jar build/libs/async-api-gateway-0.0.1-SNAPSHOT.jar
 ```
 ### Usage:
 ```
