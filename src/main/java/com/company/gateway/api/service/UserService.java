@@ -37,7 +37,6 @@ public class UserService {
                                     .user(u)
                                     .posts(p)
                                     .build());
-//                    .toBlocking().toFuture().get();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(String.format("Failed to get user with id=%s", userId));
