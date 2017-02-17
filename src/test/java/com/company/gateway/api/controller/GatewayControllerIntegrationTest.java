@@ -28,8 +28,6 @@ import static org.mockito.Mockito.when;
 public class GatewayControllerIntegrationTest {
 
     @Autowired
-    private GatewayController gatewayController;
-    @Autowired
     private ObjectMapper objectMapper;
 
     @MockBean
