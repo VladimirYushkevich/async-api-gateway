@@ -1,7 +1,7 @@
 package com.company.gateway.client;
 
-import com.company.gateway.dto.UserPostDTO;
 import com.company.gateway.dto.UserDTO;
+import com.company.gateway.dto.UserPostDTO;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-    public class TypicodeClient {
+public class TypicodeClient {
 
     @Value("${api.typicode}")
     private String baseUrl;
